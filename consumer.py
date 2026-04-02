@@ -23,6 +23,11 @@ def procesar_logica_negocio(nombre_cola, peticion, exitos, fallos):
             return exitos, fallos + 1
 
 def iniciar_worker_automatico():
+
+    #DESCOMENTAR EN EL CAS QUE ES VULGUI PROBAR EN EL AWS ( OMPLIR CREDENCIALS I ESBORRAR L'ALTRA CONEXIÓ)
+    #credenciales = pika.PlainCredentials('admin', 'admin123')
+    #conexion = pika.BlockingConnection(pika.ConnectionParameters('10.0.1.185', credentials=credenciales))
+
     conexion = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     canal = conexion.channel()
     
@@ -43,9 +48,9 @@ def iniciar_worker_automatico():
             if mensajes_esperando > 0:
                 print(f"\n ¡Allau de  {mensajes_esperando} missatges en '{nombre_cola}'!")
                 
-                db.flushdb()
-                db.set('tickets_disponibles', 20000)
-                print(" Base de datos netejada automàticament.")
+                #db.flushdb()
+                #db.set('tickets_disponibles', 20000)
+                #print(" Base de datos netejada automàticament.")
                 
                 procesados, exitos, fallos = 0, 0, 0
                 inicio_tiempo = time.time() # Inici del cronòmetre just abans de començar a processar la cua

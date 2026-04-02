@@ -17,6 +17,12 @@ def leer_archivo(ruta, tipo):
     return peticiones
 
 def enviar_a_rabbitmq(peticiones, nombre_cola):
+
+    #DESCOMENTAR EN EL CAS QUE ES VULGUI PROBAR EN EL AWS ( OMPLIR CREDENCIALS I ESBORRAR L'ALTRA CONEXIÓ)
+    #credenciales = pika.PlainCredentials('admin', 'admin123')
+    #conexion = pika.BlockingConnection(pika.ConnectionParameters('10.0.1.185', credentials=credenciales))
+
+
     conexion = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     canal = conexion.channel()
     canal.queue_declare(queue=nombre_cola)
